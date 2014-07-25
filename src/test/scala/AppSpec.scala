@@ -1,8 +1,8 @@
+import App._
 import org.scalatest._
-import org.scalatest.matchers.ShouldMatchers
 
-class AppSpec extends FlatSpec with ShouldMatchers {
-  "Hello" should "have tests" in {
-    true should be === true
+class AppSpec extends FunSuite {
+  test("generate boards") {
+    assert(boards === List("k", "", "", ""))
   }
 }
