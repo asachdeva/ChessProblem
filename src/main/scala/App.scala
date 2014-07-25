@@ -1,9 +1,18 @@
 object App {
-  val boardSize = (2, 2)
+  val boardWidth = 2
+  val boardHeight = 2
   val pieces = List("k")
+  val emptySquare = ""
 
   val boards = {
-    val tailSize = boardSize._1 * boardSize._2 - pieces.size
-    pieces ::: List.fill(tailSize){""}.toList
+    val tailSize = boardWidth * boardHeight - pieces.size
+    val allPermutations = (pieces ::: List.fill(tailSize){emptySquare}).permutations
+    transformToMatrix(allPermutations)
+  }
+
+  private def transformToMatrix(allPermutations: Iterator[List[String]]): List[List[List[String]]] = {
+    (for {
+      each <- allPermutations
+    } yield each.grouped(boardWidth).toList).toList
   }
 }
