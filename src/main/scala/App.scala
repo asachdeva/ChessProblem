@@ -10,6 +10,11 @@ object App {
     transformToMatrix(allPermutations)
   }
 
+  def getUniqueConfigurations() {
+    // TODO implement
+    boards
+  }
+
   private def transformToMatrix(allPermutations: Iterator[List[String]]): List[List[List[String]]] = {
     (for {
       each <- allPermutations
