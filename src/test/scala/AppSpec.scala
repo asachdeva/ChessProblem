@@ -7,7 +7,7 @@ class AppSpec extends FunSuite {
   }
 
   test("find unique configurations where pieces don't threaten each other") {
-    assert(boards === List(List(List("R", "x"), List("x", "R")), List(List("x", "R"), List("R", "x"))))
-    // printBoard()
+    assert(getUniqueConfigurations() === List(List(List("R", "x"), List("x", "R")), List(List("x", "R"), List("R", "x"))))
+//    printUniqueConfigurationBoards()
   }
 }

@@ -11,7 +11,11 @@ object App {
   }
 
   def getUniqueConfigurations(): List[List[List[String]]] = {
-    boards
+    for {
+      b <- boards
+      if b(0)(0) == b(1)(1) || b(1)(0) == b(0)(1)
+      if b(0)(0) == "R" || b(1)(0) == "R"
+    } yield b
   }
 
   private def transformToMatrix(allPermutations: Iterator[List[String]]): List[List[List[String]]] = {
@@ -20,7 +24,7 @@ object App {
     } yield each.grouped(boardWidth).toList).toList
   }
 
-  def printBoard() {
+  def printUniqueConfigurationBoards() {
     for {
       uc <- getUniqueConfigurations()
       c <- uc
