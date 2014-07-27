@@ -8,6 +8,10 @@ class AppSpec extends FunSuite {
 
   test("find unique configurations where pieces don't threaten each other") {
     assert(getUniqueConfigurations() === List(List(List("R", "x"), List("x", "R")), List(List("x", "R"), List("R", "x"))))
-//    printUniqueConfigurationBoards()
+    printUniqueConfigurationBoards()
+  }
+
+  test("returns moves for a rook") {
+    assert(getMoves(0, 0) === List((1, 0), (0, 1)))
   }
 }
