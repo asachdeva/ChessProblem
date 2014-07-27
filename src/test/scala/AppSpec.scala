@@ -2,11 +2,12 @@ import App._
 import org.scalatest._
 
 class AppSpec extends FunSuite {
-  test("get all possible permutations for board 2x2 with one king piece") {
-    assert(boards === List(List(List("k", emptySquare), List(emptySquare, emptySquare)), List(List(emptySquare, "k"), List(emptySquare, emptySquare)), List(List(emptySquare, emptySquare), List("k", emptySquare)), List(List(emptySquare, emptySquare), List(emptySquare, "k"))))
+  test("get all possible permutations for board 2x2 with two Rooks") {
+    assert(boards === List(List(List("R", "R"), List("x", "x")), List(List("R", "x"), List("R", "x")), List(List("R", "x"), List("x", "R")), List(List("x", "R"), List("R", "x")), List(List("x", "R"), List("x", "R")), List(List("x", "x"), List("R", "R"))))
   }
 
   test("find unique configurations where pieces don't threaten each other") {
-    assert(getUniqueConfigurations() === List(List(List("k", emptySquare), List(emptySquare, emptySquare)), List(List(emptySquare, "k"), List(emptySquare, emptySquare)), List(List(emptySquare, emptySquare), List("k", emptySquare)), List(List(emptySquare, emptySquare), List(emptySquare, "k"))))
+    assert(boards === List(List(List("R", "x"), List("x", "R")), List(List("x", "R"), List("R", "x"))))
+    // printBoard()
   }
 }

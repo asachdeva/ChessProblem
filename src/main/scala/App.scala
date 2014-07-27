@@ -1,8 +1,8 @@
 object App {
   val boardWidth = 2
   val boardHeight = 2
-  val pieces = List("k")
-  val emptySquare = ""
+  val pieces = List("R", "R")
+  val emptySquare = "x"
 
   val boards = {
     val tailSize = boardWidth * boardHeight - pieces.size
@@ -10,8 +10,7 @@ object App {
     transformToMatrix(allPermutations)
   }
 
-  def getUniqueConfigurations() {
-    // TODO implement
+  def getUniqueConfigurations(): List[List[List[String]]] = {
     boards
   }
 
@@ -19,5 +18,12 @@ object App {
     (for {
       each <- allPermutations
     } yield each.grouped(boardWidth).toList).toList
+  }
+
+  def printBoard() {
+    for {
+      uc <- getUniqueConfigurations()
+      c <- uc
+    } println(c.mkString(""))
   }
 }
