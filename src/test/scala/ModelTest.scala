@@ -39,4 +39,10 @@ class ModelTest extends FunSuite {
     // TODO impl
     assert(p.getMoves(1, 1, 3, 3) === List((0,1), (2,1), (1,0), (1,2), (2,0), (0,2), (2,2), (0,0)))
   }
+
+  test("all possible moves for Bishop on board 3x3") {
+    val p = new Bishop()
+    // TODO impl
+    assert(p.getMoves(1, 1, 3, 3) === List((2,0), (0,2), (2,2), (0,0)))
+  }
 }
