@@ -1,7 +1,8 @@
 class Game(boardWidth: Int, boardHeight: Int, pieces: List[Piece]) {
   type Board = List[List[Any]]
 
-  val boards: List[Board] = {
+
+  lazy val boards: List[Board] = {
     val tailSize = boardWidth * boardHeight - pieces.size
     val allPermutations: List[List[Any]] = (pieces ::: List.fill(tailSize) {
       Empty.apply()

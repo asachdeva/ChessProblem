@@ -42,18 +42,18 @@ case class King() extends Piece {
 
 case class Queen() extends Piece {
   override def getMoves(x: Int, y: Int, boardWidth: Int, boardHeight: Int): List[(Int, Int)] = {
-        (for {
-          xdx <- 0 until boardWidth
-          if xdx != x
-        } yield (xdx, y)).toList ++
-          (for {
-            ydy <- 0 until boardHeight
-            if ydy != y
-          } yield (x, ydy)).toList ++
-    getMovesRightUp((x until boardWidth).toList, x, y, List()) ++
-    getMovesLeftDown((0 to x).reverse.toList, x, y, List()) ++
-    getMovesRightDown((x until boardWidth).toList, x, y, List()).filter(p => p._2 < boardHeight) ++
-    getMovesLeftUp((0 to x).reverse.toList, x, y, List())
+    (for {
+      xdx <- 0 until boardWidth
+      if xdx != x
+    } yield (xdx, y)).toList ++
+      (for {
+        ydy <- 0 until boardHeight
+        if ydy != y
+      } yield (x, ydy)).toList ++
+      getMovesRightUp((x until boardWidth).toList, x, y, List()) ++
+      getMovesLeftDown((0 to x).reverse.toList, x, y, List()) ++
+      getMovesRightDown((x until boardWidth).toList, x, y, List()).filter(p => p._2 < boardHeight) ++
+      getMovesLeftUp((0 to x).reverse.toList, x, y, List())
     // TODO refactor
   }
 
@@ -106,7 +106,7 @@ case class Queen() extends Piece {
 
 case class Bishop() extends Piece {
   override def getMoves(x: Int, y: Int, boardWidth: Int, boardHeight: Int): List[(Int, Int)] = {
-      getMovesRightUp((x until boardWidth).toList, x, y, List()) ++
+    getMovesRightUp((x until boardWidth).toList, x, y, List()) ++
       getMovesLeftDown((0 to x).reverse.toList, x, y, List()) ++
       getMovesRightDown((x until boardWidth).toList, x, y, List()).filter(p => p._2 < boardHeight) ++
       getMovesLeftUp((0 to x).reverse.toList, x, y, List())
@@ -155,6 +155,15 @@ case class Bishop() extends Piece {
         val res = (x - 1, y - 1)
         getMovesLeftUp(xs, res._1, res._2, res :: buff)
       }
+  }
+
+  override def toString = "B"
+}
+
+case class Knight() extends Piece {
+  override def getMoves(x: Int, y: Int, boardWidth: Int, boardHeight: Int): List[(Int, Int)] = {
+    List((x + 2, y - 1), (x + 2, y + 1), (x + 1, y - 2), (x - 1, y - 2), (x + 1, y + 2), (x - 1, y + 2),
+      (x - 2, y - 1), (x - 2, y + 1)).filter(x => x._1 >= 0 && x._1 < boardWidth && x._2 >= 0 && x._2 < boardHeight)
   }
 
   override def toString = "B"
