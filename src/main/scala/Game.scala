@@ -1,33 +1,22 @@
 class Game(boardWidth: Int, boardHeight: Int, pieces: List[Piece]) {
-  type Board = List[List[Any]]
+  type Board = List[Object]
 
 
-  lazy val boards: List[Board] = {
-    val tailSize = boardWidth * boardHeight - pieces.size
-    val allPermutations: List[List[Any]] = (pieces ::: List.fill(tailSize) {
-      Empty.apply()
-    }).permutations.toList
-
-    toMatrix(allPermutations)
-  }
-
-  def getUniqueConfigurations(): List[Board] = {
-    for {
-      b <- boards
-      if isUniqueConfiguration(b)
-    } yield b
+  val boards: List[Board] = {
+    (pieces ::: List.fill(boardWidth * boardHeight - pieces.size){Empty.apply()}).permutations.filter(p => isUniqueConfiguration(p)).toList
   }
 
   protected def isUniqueConfiguration(board: Board): Boolean = {
+    val sb = splitBoard(board)
     for {
       x <- 0 until boardWidth
       y <- 0 until boardHeight
     } {
-      board(x)(y) match {
+      sb(x)(y) match {
         case p: Piece => {
           for {
             (a, b) <- p.getMoves(x, y, boardWidth, boardHeight)
-            if !board(a)(b).isInstanceOf[Empty]
+            if !sb(a)(b).isInstanceOf[Empty]
           }
             return false
         }
@@ -38,22 +27,19 @@ class Game(boardWidth: Int, boardHeight: Int, pieces: List[Piece]) {
     true
   }
 
-  def printUniqueConfigurationBoards() {
+  private def splitBoard(board: Board) = board.grouped(boardWidth).toList
+
+
+def printUniqueConfigurationBoards() {
     for {
-      uc <- getUniqueConfigurations()
-    } printBoard(uc)
+      uc <- boards
+    } printBoard(splitBoard(uc))
   }
 
-  private def toMatrix(allPermutations: List[List[Any]]): List[List[List[Any]]] = {
-    (for {
-      each <- allPermutations
-    } yield each.grouped(boardWidth).toList)
-  }
-
-  private def printBoard(board: Board) {
+private def printBoard(board: Board) {
     for {
       b <- board
-    } println(b.mkString(" - "))
+    } println(b)
     println()
   }
 }
