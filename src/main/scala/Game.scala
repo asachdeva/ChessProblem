@@ -5,7 +5,8 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
   lazy val boards: Set[Board] = {
     val result = placePieces(p)
     // FIXME Remove duplicates
-    result.take(result.size / 2)
+    if (result.size == 0) result
+    else result.take(result.size / 2)
   }
 
   def placePieces(k: List[Any]): Set[List[Piece]] = k match {
@@ -19,6 +20,10 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
     } yield piece :: pieces
   }
 
+  def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
+
+  def isAttacked(p0: Piece, p1: Piece) = p0.isAttacking(p1) || p1.isAttacking(p0)
+
   def getPieceFor(p: Any, x: Int, y: Int) = p match {
     case Rook => Rook(x, y)
     case Queen => Queen(x, y)
@@ -26,10 +31,6 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
     case Bishop => Bishop(x, y)
     case Knight => Knight(x, y)
   }
-
-  def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
-
-  def isAttacked(p0: Piece, p1: Piece) = p0.isAttacking(p1) || p1.isAttacking(p0)
 
   def show() {
     val nrOfSolutions = boards.size

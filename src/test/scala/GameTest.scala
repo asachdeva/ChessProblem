@@ -60,15 +60,15 @@ class GameTest extends FunSuite {
   }
 
   test("isAttacked for Knight") {
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(3, 1)) == true)
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(4, 2)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(3, 1)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(4, 2)) == true)
 
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(4, 4)) == true)
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(3, 5)) == true)
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(1, 5)) == true)
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(0, 4)) == true)
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(0, 2)) == true)
-    assert(game2x2.isAttacked(Knight(2, 3), Rook(1, 1)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(4, 4)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(3, 5)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(1, 5)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(0, 4)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(0, 2)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Bishop(1, 1)) == true)
   }
 
   test("isAttacked for King") {

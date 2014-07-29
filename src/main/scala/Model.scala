@@ -37,9 +37,6 @@ case class Knight(cor: (Int, Int)) extends Piece(cor) {
     moves.contains((p.x, p.y))
   }
 
-  override def toString = "Kn"
+  override def toString = "N"
 }
-
-
-
 
