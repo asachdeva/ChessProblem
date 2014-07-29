@@ -14,20 +14,26 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
       pieces <- placePieces(xs)
       col <- 0 until w
       row <- 0 until h
-      piece = get(x, row, col)
+      piece = getPieceFor(x, row, col)
       if (isSafe(piece, pieces))
     } yield piece :: pieces
   }
 
-  def get(p: Any, i: Int, i1: Int) = p match {
-    case Rook => Rook(i, i1)
-    case Queen => Queen(i, i1)
+  def getPieceFor(p: Any, x: Int, y: Int) = p match {
+    case Rook => Rook(x, y)
+    case Queen => Queen(x, y)
+    case King => King(x, y)
+    case Bishop => Bishop(x, y)
+    case Knight => Knight(x, y)
   }
 
   def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
 
-  def isAttacked(r1: Piece, r2: Piece) = (r1, r2) match {
-    case (rook1@Rook(_), rook2@Rook(_)) => rook1.cor._1 == rook2.cor._1 || rook1.cor._2 == rook2.cor._2
+  def isAttacked(r0: Piece, r1: Piece) = (r0, r1) match {
+    case (r0@Rook(_), r1@Rook(_)) => r0.cor._1 == r1.cor._1 || r0.cor._2 == r1.cor._2
+    case (q0@Queen(_), q1@Queen(_)) => q0.cor._1 == q1.cor._1 || q0.cor._2 == q1.cor._2 || math.abs(q0.x - q1.x) == math.abs(q0.y - q1.y)
+    case (r0@Rook(_), q1@Queen(_)) => r0.cor._1 == q1.cor._1 || r0.cor._2 == q1.cor._2 || math.abs(r0.x - q1.x) == math.abs(r0.y - q1.y)
+    case (q1@Queen(_), r0@Rook(_)) => r0.cor._1 == q1.cor._1 || r0.cor._2 == q1.cor._2 || math.abs(r0.x - q1.x) == math.abs(r0.y - q1.y)
   }
 
   def show() {

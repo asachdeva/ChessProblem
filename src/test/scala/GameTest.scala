@@ -18,4 +18,39 @@ class GameTest extends FunSuite {
     assert(game2x2.boards.toList(1)(1).x === 1)
     assert(game2x2.boards.toList(1)(1).y === 0)
   }
+
+  test("is Rook attacking other Rook") {
+    assert(game2x2.isAttacked(Rook(0,0), Rook(0,0)) == true)
+    assert(game2x2.isAttacked(Rook(0,0), Rook(1,0)) == true)
+    assert(game2x2.isAttacked(Rook(0,0), Rook(0,1)) == true)
+
+    assert(game2x2.isAttacked(Rook(0,0), Rook(1,1)) == false)
+  }
+
+  test("is Queen attacking other Queen") {
+    assert(game2x2.isAttacked(Queen(0,0), Queen(2,0)) == true)
+    assert(game2x2.isAttacked(Queen(2,2), Queen(2,0)) == true)
+    assert(game2x2.isAttacked(Queen(1,1), Queen(2,0)) == true)
+
+    assert(game2x2.isAttacked(Queen(0,1), Queen(2,0)) == false)
+    assert(game2x2.isAttacked(Queen(1,2), Queen(2,0)) == false)
+  }
+
+  test("is Rook attacking Queen") {
+    assert(game2x2.isAttacked(Rook(0,0), Queen(2,0)) == true)
+    assert(game2x2.isAttacked(Rook(2,2), Queen(2,0)) == true)
+    assert(game2x2.isAttacked(Rook(1,1), Queen(2,0)) == true)
+
+    assert(game2x2.isAttacked(Rook(0,1), Queen(2,0)) == false)
+    assert(game2x2.isAttacked(Rook(1,2), Queen(2,0)) == false)
+  }
+
+  test("is Queen attacking Rook") {
+    assert(game2x2.isAttacked(Queen(0,0), Rook(2,0)) == true)
+    assert(game2x2.isAttacked(Queen(2,2), Rook(2,0)) == true)
+    assert(game2x2.isAttacked(Queen(1,1), Rook(2,0)) == true)
+
+    assert(game2x2.isAttacked(Queen(0,1), Rook(2,0)) == false)
+    assert(game2x2.isAttacked(Queen(1,2), Rook(2,0)) == false)
+  }
 }
