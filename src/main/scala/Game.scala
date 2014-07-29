@@ -29,8 +29,8 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
 
   def show() {
     val nrOfSolutions = boards.size
-    val pieces = p.groupBy(w => w).mapValues(_.size).mkString(", ")
-    println(s"Number of solutions for $pieces on board $w*$h => $nrOfSolutions")
+    val pieces = p.groupBy(w => w).mapValues(_.size).map{ case (k, v) => s"$k=$v"}.mkString(", ")
+    println(s"$nrOfSolutions solutions for $pieces on board $w*$h")
     // prints only one solution
     // printBoard(boards.head)
     // prints n boards
@@ -47,7 +47,6 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
       }
       println()
     }
-    //println(board map (p => (p.x, p.y)) mkString (""))
     println()
   }
 }
