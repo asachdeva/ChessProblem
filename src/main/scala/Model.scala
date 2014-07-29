@@ -12,7 +12,7 @@ case class Rook(cor: (Int, Int)) extends Piece(cor) {
 
 case class King(cor: (Int, Int)) extends Piece(cor) {
   def isAttacking(p: Piece) = {
-    val moves = List((x-1, y-1), (x, y-1), (x+1, y-1), (x-1, y), (x+1, y), (x-1, y+1),(x, y+1), (x+1, y+1))
+    val moves = List((x, y), (x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x - 1, y), (x + 1, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1))
     moves.contains((p.x, p.y))
   }
 

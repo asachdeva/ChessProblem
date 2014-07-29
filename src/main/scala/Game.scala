@@ -12,7 +12,7 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
       row <- 0 until h
       piece = getPieceFor(x, row, col)
       if (isSafe(piece, pieces))
-    } yield (piece :: pieces).sortBy(_.x)
+    } yield (piece :: pieces).sortBy(t => (t.x, t.y))
   }
 
   def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
@@ -32,9 +32,9 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
     val pieces = p.groupBy(w => w).mapValues(_.size).mkString(", ")
     println(s"Number of solutions for $pieces on board $w*$h => $nrOfSolutions")
     // prints only one solution
-    printBoard(boards.head)
-    // prints all boards
-    // boards map printBoard
+    // printBoard(boards.head)
+    // prints n boards
+    boards take 10 map printBoard
   }
 
   private def printBoard(board: Board) {
@@ -47,6 +47,7 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
       }
       println()
     }
+    //println(board map (p => (p.x, p.y)) mkString (""))
     println()
   }
 }

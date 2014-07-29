@@ -8,10 +8,10 @@ class GameTest extends FunSuite {
   }
 
   test("find unique configurations where pieces don't threaten each other on 2x2") {
-    assert(game2x2.boards.toList(0)(0).x === 1)
-    assert(game2x2.boards.toList(0)(0).y === 1)
-    assert(game2x2.boards.toList(0)(1).x === 0)
-    assert(game2x2.boards.toList(0)(1).y === 0)
+    assert(game2x2.boards.toList(0)(0).x === 0)
+    assert(game2x2.boards.toList(0)(0).y === 0)
+    assert(game2x2.boards.toList(0)(1).x === 1)
+    assert(game2x2.boards.toList(0)(1).y === 1)
 
     assert(game2x2.boards.toList(1)(0).x === 0)
     assert(game2x2.boards.toList(1)(0).y === 1)
@@ -80,6 +80,7 @@ class GameTest extends FunSuite {
     assert(game2x2.isAttacked(King(1, 1), Knight(0, 2)) == true)
     assert(game2x2.isAttacked(King(1, 1), Knight(1, 2)) == true)
     assert(game2x2.isAttacked(King(1, 1), Knight(2, 2)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(1, 1)) == true)
 
     assert(game2x2.isAttacked(King(1, 1), Knight(3, 3)) == false)
   }
