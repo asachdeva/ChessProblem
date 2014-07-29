@@ -10,7 +10,7 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
       pieces <- placePieces(xs)
       col <- 0 until w
       row <- 0 until h
-      piece = getPieceFor(x, row, col)
+      piece = build(x, row, col)
       if (isSafe(piece, pieces))
     } yield (piece :: pieces).sortBy(t => (t.x, t.y))
   }
@@ -19,7 +19,7 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
 
   def isAttacked(p0: Piece, p1: Piece) = p0.isAttacking(p1) || p1.isAttacking(p0)
 
-  def getPieceFor(p: Any, x: Int, y: Int) = p match {
+  def build(p: Any, x: Int, y: Int) = p match {
     case Rook => Rook(x, y)
     case Queen => Queen(x, y)
     case King => King(x, y)
@@ -29,10 +29,8 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
 
   def show() {
     val nrOfSolutions = boards.size
-    val pieces = p.groupBy(w => w).mapValues(_.size).map{ case (k, v) => s"$k=$v"}.mkString(", ")
+    val pieces = p.groupBy(w => w).mapValues(_.size).map { case (k, v) => s"$k=$v"}.mkString(", ")
     println(s"$nrOfSolutions solutions for $pieces on board $w*$h")
-    // prints only one solution
-    // printBoard(boards.head)
     // prints n boards
     boards take 10 map printBoard
   }
