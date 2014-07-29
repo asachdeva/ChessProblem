@@ -2,12 +2,7 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
   type Board = List[Piece]
   val (w, h) = boardSize
 
-  lazy val boards: Set[Board] = {
-    val result = placePieces(p)
-    // FIXME Remove duplicates
-    if (result.size == 0) result
-    else result.take(result.size / 2)
-  }
+  lazy val boards: Set[Board] = placePieces(p)
 
   def placePieces(k: List[Any]): Set[List[Piece]] = k match {
     case Nil => Set(List())
@@ -17,7 +12,7 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
       row <- 0 until h
       piece = getPieceFor(x, row, col)
       if (isSafe(piece, pieces))
-    } yield piece :: pieces
+    } yield (piece :: pieces).sortBy(_.x)
   }
 
   def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
@@ -36,7 +31,10 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
     val nrOfSolutions = boards.size
     val pieces = p.groupBy(w => w).mapValues(_.size).mkString(", ")
     println(s"Number of solutions for $pieces on board $w*$h => $nrOfSolutions")
-    boards map printBoard
+    // prints only one solution
+    printBoard(boards.head)
+    // prints all boards
+    // boards map printBoard
   }
 
   private def printBoard(board: Board) {
