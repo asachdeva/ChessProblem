@@ -29,12 +29,7 @@ class Game(boardSize: (Int, Int), p: List[Any]) {
 
   def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
 
-  def isAttacked(r0: Piece, r1: Piece) = (r0, r1) match {
-    case (r0@Rook(_), r1@Rook(_)) => r0.cor._1 == r1.cor._1 || r0.cor._2 == r1.cor._2
-    case (q0@Queen(_), q1@Queen(_)) => q0.cor._1 == q1.cor._1 || q0.cor._2 == q1.cor._2 || math.abs(q0.x - q1.x) == math.abs(q0.y - q1.y)
-    case (r0@Rook(_), q1@Queen(_)) => r0.cor._1 == q1.cor._1 || r0.cor._2 == q1.cor._2 || math.abs(r0.x - q1.x) == math.abs(r0.y - q1.y)
-    case (q1@Queen(_), r0@Rook(_)) => r0.cor._1 == q1.cor._1 || r0.cor._2 == q1.cor._2 || math.abs(r0.x - q1.x) == math.abs(r0.y - q1.y)
-  }
+  def isAttacked(p0: Piece, p1: Piece) = p0.isAttacking(p1) || p1.isAttacking(p0)
 
   def show() {
     val nrOfSolutions = boards.size

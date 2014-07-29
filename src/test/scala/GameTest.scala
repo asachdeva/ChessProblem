@@ -19,38 +19,68 @@ class GameTest extends FunSuite {
     assert(game2x2.boards.toList(1)(1).y === 0)
   }
 
-  test("is Rook attacking other Rook") {
-    assert(game2x2.isAttacked(Rook(0,0), Rook(0,0)) == true)
-    assert(game2x2.isAttacked(Rook(0,0), Rook(1,0)) == true)
-    assert(game2x2.isAttacked(Rook(0,0), Rook(0,1)) == true)
+  test("isAttacked for Rook") {
+    assert(game2x2.isAttacked(Rook(0, 0), Rook(0, 0)) == true)
+    assert(game2x2.isAttacked(Rook(0, 0), Rook(1, 0)) == true)
+    assert(game2x2.isAttacked(Rook(0, 0), Rook(0, 1)) == true)
 
-    assert(game2x2.isAttacked(Rook(0,0), Rook(1,1)) == false)
+    assert(game2x2.isAttacked(Rook(0, 0), Rook(1, 1)) == false)
   }
 
-  test("is Queen attacking other Queen") {
-    assert(game2x2.isAttacked(Queen(0,0), Queen(2,0)) == true)
-    assert(game2x2.isAttacked(Queen(2,2), Queen(2,0)) == true)
-    assert(game2x2.isAttacked(Queen(1,1), Queen(2,0)) == true)
+  test("isAttacked for Queen") {
+    assert(game2x2.isAttacked(Queen(0, 0), Queen(2, 0)) == true)
+    assert(game2x2.isAttacked(Queen(2, 2), Queen(2, 0)) == true)
+    assert(game2x2.isAttacked(Queen(1, 1), Queen(2, 0)) == true)
 
-    assert(game2x2.isAttacked(Queen(0,1), Queen(2,0)) == false)
-    assert(game2x2.isAttacked(Queen(1,2), Queen(2,0)) == false)
+    assert(game2x2.isAttacked(Queen(0, 1), Queen(2, 0)) == false)
+    assert(game2x2.isAttacked(Queen(1, 2), Queen(2, 0)) == false)
   }
 
-  test("is Rook attacking Queen") {
-    assert(game2x2.isAttacked(Rook(0,0), Queen(2,0)) == true)
-    assert(game2x2.isAttacked(Rook(2,2), Queen(2,0)) == true)
-    assert(game2x2.isAttacked(Rook(1,1), Queen(2,0)) == true)
+  test("isAttacked for Rook and Queen") {
+    assert(game2x2.isAttacked(Rook(0, 0), Queen(2, 0)) == true)
+    assert(game2x2.isAttacked(Rook(2, 2), Queen(2, 0)) == true)
+    assert(game2x2.isAttacked(Rook(1, 1), Queen(2, 0)) == true)
 
-    assert(game2x2.isAttacked(Rook(0,1), Queen(2,0)) == false)
-    assert(game2x2.isAttacked(Rook(1,2), Queen(2,0)) == false)
+    assert(game2x2.isAttacked(Rook(0, 1), Queen(2, 0)) == false)
+    assert(game2x2.isAttacked(Rook(1, 2), Queen(2, 0)) == false)
+
+    assert(game2x2.isAttacked(Queen(0, 0), Rook(2, 0)) == true)
+    assert(game2x2.isAttacked(Queen(2, 2), Rook(2, 0)) == true)
+    assert(game2x2.isAttacked(Queen(1, 1), Rook(2, 0)) == true)
+
+    assert(game2x2.isAttacked(Queen(0, 1), Rook(2, 0)) == false)
+    assert(game2x2.isAttacked(Queen(1, 2), Rook(2, 0)) == false)
   }
 
-  test("is Queen attacking Rook") {
-    assert(game2x2.isAttacked(Queen(0,0), Rook(2,0)) == true)
-    assert(game2x2.isAttacked(Queen(2,2), Rook(2,0)) == true)
-    assert(game2x2.isAttacked(Queen(1,1), Rook(2,0)) == true)
+  test("isAttacked for Bishop") {
+    assert(game2x2.isAttacked(Bishop(0, 0), Rook(2, 0)) == true)
+    assert(game2x2.isAttacked(Bishop(0, 2), Rook(2, 0)) == true)
 
-    assert(game2x2.isAttacked(Queen(0,1), Rook(2,0)) == false)
-    assert(game2x2.isAttacked(Queen(1,2), Rook(2,0)) == false)
+    assert(game2x2.isAttacked(Bishop(0, 1), Rook(2, 0)) == false)
+  }
+
+  test("isAttacked for Knight") {
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(3, 1)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(4, 2)) == true)
+
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(4, 4)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(3, 5)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(1, 5)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(0, 4)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(0, 2)) == true)
+    assert(game2x2.isAttacked(Knight(2, 3), Rook(1, 1)) == true)
+  }
+
+  test("isAttacked for King") {
+    assert(game2x2.isAttacked(King(1, 1), Knight(0, 0)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(1, 0)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(2, 0)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(0, 1)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(2, 1)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(0, 2)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(1, 2)) == true)
+    assert(game2x2.isAttacked(King(1, 1), Knight(2, 2)) == true)
+
+    assert(game2x2.isAttacked(King(1, 1), Knight(3, 3)) == false)
   }
 }
