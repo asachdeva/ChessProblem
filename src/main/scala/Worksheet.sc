@@ -1,3 +1,3 @@
-val game7x7 = new Game(7, 7, List(new King(), new King(), new Queen(), new Queen(), new Bishop(), new Bishop(), new Knight()))
+val game = new Game((2, 2), List(Rook, Rook))
 
-2*2
+game.show()
