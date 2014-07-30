@@ -1,19 +1,24 @@
 package com.kgrodzicki.chessproblem
 
-sealed abstract class Piece(cor: (Int, Int)) {
-  val (x, y) = cor
+sealed trait Piece {
+  val cor: (Int, Int)
+
+  def x = cor._1
+
+  def y = cor._2
 
   def isAttacking(p: Piece): Boolean
+
 }
 
-case class Rook(cor: (Int, Int)) extends Piece(cor) {
-  def isAttacking(p: Piece) = p.x == x || p.y == y
+case class Rook(cor: (Int, Int)) extends Piece {
+  override def isAttacking(p: Piece) = p.x == x || p.y == y
 
   override def toString = "R"
 }
 
-case class King(cor: (Int, Int)) extends Piece(cor) {
-  def isAttacking(p: Piece) = {
+case class King(cor: (Int, Int)) extends Piece {
+  override def isAttacking(p: Piece) = {
     val moves = List((x, y), (x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x - 1, y),
       (x + 1, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1))
     moves.contains((p.x, p.y))
@@ -22,25 +27,37 @@ case class King(cor: (Int, Int)) extends Piece(cor) {
   override def toString = "K"
 }
 
-case class Queen(cor: (Int, Int)) extends Piece(cor) {
-  def isAttacking(p: Piece) = p.x == x || p.y == y || math.abs(p.x - x) == math.abs(p.y - y)
+case class Queen(cor: (Int, Int)) extends Piece {
+  override def isAttacking(p: Piece) = p.x == x || p.y == y || math.abs(p.x - x) == math.abs(p.y - y)
 
   override def toString = "Q"
 }
 
-case class Bishop(cor: (Int, Int)) extends Piece(cor) {
+case class Bishop(cor: (Int, Int)) extends Piece {
   def isAttacking(p: Piece) = math.abs(p.x - x) == math.abs(p.y - y)
 
   override def toString = "B"
 }
 
-case class Knight(cor: (Int, Int)) extends Piece(cor) {
-  def isAttacking(p: Piece) = {
+case class Knight(cor: (Int, Int)) extends Piece {
+  override def isAttacking(p: Piece) = {
     val moves = List((x + 1, y - 2), (x + 2, y - 1), (x + 2, y + 1), (x + 1, y + 2),
       (x - 1, y + 2), (x - 2, y + 1), (x - 2, y - 1), (x - 1, y - 2))
     moves.contains((p.x, p.y))
   }
 
   override def toString = "N"
+}
+
+object PieceFactory {
+
+  def build(p: Any, x: Int, y: Int) = p match {
+    case Rook => Rook(x, y)
+    case Queen => Queen(x, y)
+    case King => King(x, y)
+    case Bishop => Bishop(x, y)
+    case Knight => Knight(x, y)
+    case _ => throw new IllegalArgumentException(s"No Piece for $p")
+  }
 }
 

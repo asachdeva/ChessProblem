@@ -10,15 +10,11 @@ class AppTest extends FunSuite {
   }
 
   test("find unique configurations where pieces don't threaten each other on 2x2") {
-    assert(a.boards.toList(0)(0).x === 0)
-    assert(a.boards.toList(0)(0).y === 0)
-    assert(a.boards.toList(0)(1).x === 1)
-    assert(a.boards.toList(0)(1).y === 1)
+    assert(a.boards.toList(0)(0).cor ===(0, 0))
+    assert(a.boards.toList(0)(1).cor ===(1, 1))
 
-    assert(a.boards.toList(1)(0).x === 0)
-    assert(a.boards.toList(1)(0).y === 1)
-    assert(a.boards.toList(1)(1).x === 1)
-    assert(a.boards.toList(1)(1).y === 0)
+    assert(a.boards.toList(1)(0).cor ===(0, 1))
+    assert(a.boards.toList(1)(1).cor ===(1, 0))
   }
 
   test("isAttacked for Rook") {

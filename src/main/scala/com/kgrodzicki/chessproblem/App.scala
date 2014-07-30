@@ -12,22 +12,14 @@ class App(boardSize: (Int, Int), p: List[Any]) {
       pieces <- placePieces(xs)
       col <- 0 until w
       row <- 0 until h
-      piece = build(x, row, col)
+      piece = PieceFactory.build(x, row, col)
       if (isSafe(piece, pieces))
-    } yield (piece :: pieces).sortBy(t => (t.x, t.y))
+    } yield (piece :: pieces).sortBy(_.cor)
   }
 
   def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
 
   def isAttacked(p0: Piece, p1: Piece) = p0.isAttacking(p1) || p1.isAttacking(p0)
-
-  def build(p: Any, x: Int, y: Int) = p match {
-    case Rook => Rook(x, y)
-    case Queen => Queen(x, y)
-    case King => King(x, y)
-    case Bishop => Bishop(x, y)
-    case Knight => Knight(x, y)
-  }
 
   def show() {
     val nrOfSolutions = boards.size
