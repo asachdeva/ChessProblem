@@ -1,3 +1,5 @@
+package com.kgrodzicki.chessproblem
+
 class App(boardSize: (Int, Int), p: List[Any]) {
   type Board = List[Piece]
   val (w, h) = boardSize

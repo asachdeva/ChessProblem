@@ -1,3 +1,5 @@
+package com.kgrodzicki.chessproblem
+
 sealed abstract class Piece(cor: (Int, Int)) {
   val (x, y) = cor
 

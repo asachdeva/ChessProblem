@@ -1,3 +1,5 @@
+package com.kgrodzicki.chessproblem
+
 import org.scalatest._
 
 class AppTest extends FunSuite {
