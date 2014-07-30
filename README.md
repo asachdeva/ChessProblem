@@ -5,7 +5,7 @@ board with dimensions M×N where none of the pieces is in a position to take any
 others. Assume the colour of the piece does not matter, and that there are no pawns among
 the pieces.
 
-# How to run program for 7×7 board with 2 Kings, 2 Queens, 2 Bishops and 1 Knight
+### How to run program for 7×7 board with 2 Kings, 2 Queens, 2 Bishops and 1 Knight
 
 1. In the console using sbt
 ```
