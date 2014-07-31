@@ -7,7 +7,8 @@ the pieces.
 
 ### How to run program for 7×7 board with 2 Kings, 2 Queens, 2 Bishops and 1 Knight
 
-1. In the console using sbt
+1. In Intellij IDEA run Worksheet.sc
+2. In the console using sbt
 ```
 $ export SBT_OPTS="-Xmx4G -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=4G -Xss2M"
 $ sbt
