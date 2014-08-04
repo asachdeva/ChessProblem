@@ -1,5 +1,7 @@
 import java.util.concurrent.TimeUnit
+
 import com.kgrodzicki.chessproblem._
+
 def time[A](f: => A) = {
   val s = System.nanoTime()
   val ret = f
@@ -10,4 +12,3 @@ def time[A](f: => A) = {
 val a = new App((7, 7), List(King, King, Queen, Queen, Bishop, Bishop, Knight))
 
 time(a.show())
-
