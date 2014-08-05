@@ -5,8 +5,6 @@ sealed trait Piece {
 
   def y: Int
 
-  def cor = (x, y)
-
   def isAttacking(p: Piece): Boolean
 }
 
@@ -50,7 +48,6 @@ case class Knight(x: Int, y: Int) extends Piece {
 
 object PieceFactory {
   def build(p: (Int, Int) => Piece, x: Int, y: Int) = p match {
-    case Rook => Rook(x, y)
     case Rook => Rook(x, y)
     case Queen => Queen(x, y)
     case King => King(x, y)

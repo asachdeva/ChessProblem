@@ -3,7 +3,7 @@ package com.kgrodzicki.chessproblem
 class App(boardWidth: Int, boardHeight: Int, pieces: List[(Int, Int) => Piece]) {
   type Board = List[Piece]
 
-  lazy val boards: Set[Board] = placePieces(pieces)
+  val boards: Set[Board] = placePieces(pieces)
 
   def placePieces(k: List[(Int, Int) => Piece]): Set[List[Piece]] = k match {
     case Nil => Set(List())
