@@ -22,7 +22,7 @@ Type :help for more information.
 scala> import com.kgrodzicki.chessproblem._
 import com.kgrodzicki.chessproblem._
 
-scala> val game = new App((7, 7), List(King, King, Queen, Queen, Bishop, Bishop, Knight))
+scala> val game = new App(7, 7, List(King, King, Queen, Queen, Bishop, Bishop, Knight))
 game: com.kgrodzicki.chessproblem.App = com.kgrodzicki.chessproblem.App@3bd2057d
 
 scala> game.show()

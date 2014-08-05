@@ -1,20 +1,19 @@
 package com.kgrodzicki.chessproblem
 
-class App(boardSize: (Int, Int), p: List[Any]) {
+class App(boardWidth: Int, boardHeight: Int, pieces: List[(Int, Int) => Piece]) {
   type Board = List[Piece]
-  val (w, h) = boardSize
 
-  lazy val boards: Set[Board] = placePieces(p)
+  lazy val boards: Set[Board] = placePieces(pieces)
 
-  def placePieces(k: List[Any]): Set[List[Piece]] = k match {
+  def placePieces(k: List[(Int, Int) => Piece]): Set[List[Piece]] = k match {
     case Nil => Set(List())
     case x :: xs => for {
       pieces <- placePieces(xs)
-      col <- 0 until w
-      row <- 0 until h
-      piece = PieceFactory.build(x, row, col)
+      column <- 0 until boardWidth
+      row <- 0 until boardHeight
+      piece = PieceFactory.build(x, row, column)
       if (isSafe(piece, pieces))
-    } yield (piece :: pieces).sortBy(_.cor)
+    } yield (piece :: pieces).sortBy(r => (r.x, r.y))
   }
 
   def isSafe(piece: Piece, others: List[Piece]) = others forall (!isAttacked(piece, _))
@@ -23,15 +22,15 @@ class App(boardSize: (Int, Int), p: List[Any]) {
 
   def show() {
     val nrOfSolutions = boards.size
-    val pieces = p.groupBy(w => w).mapValues(_.size).map { case (k, v) => s"$k=$v"}.mkString(", ")
-    println(s"$nrOfSolutions solutions for $pieces on board $w*$h")
-    // prints n boards
+    val nrOfPieces = pieces.groupBy(_.getClass().getSimpleName()).mapValues(_.size).map { case (k, v) => s"$k=$v"}.mkString(", ")
+    println(s"$nrOfSolutions solutions for $nrOfPieces on board $boardWidth*$boardHeight")
+    // prints n unique boards
     boards.take(10).map(printBoard(_))
   }
 
   private def printBoard(board: Board) {
-    for (y <- 0 until h) {
-      for (x <- 0 until w) {
+    for (y <- 0 until boardHeight) {
+      for (x <- 0 until boardWidth) {
         board.find(p => p.x == x && p.y == y) match {
           case Some(piece) => print(s"$piece ")
           case None => print(". ")

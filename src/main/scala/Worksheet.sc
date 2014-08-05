@@ -9,6 +9,6 @@ def time[A](f: => A) = {
   println(s"Execution time: $elapsedTime s")
   ret
 }
-val a = new App((7, 7), List(King, King, Queen, Queen, Bishop, Bishop, Knight))
 
+val a = new App(7, 7, List(King, King, Queen, Queen, Bishop, Bishop, Knight))
 time(a.show())

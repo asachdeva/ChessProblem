@@ -3,7 +3,7 @@ package com.kgrodzicki.chessproblem
 import org.scalatest._
 
 class AppTest extends FunSuite {
-  val a = new App((2, 2), List(Rook, Rook))
+  val a = new App(2, 2, List(Rook, Rook))
 
   test("get all possible permutations for board 2x2 with two Rooks") {
     assert(a.boards.size == 2)
