@@ -1,5 +1,5 @@
 ### Status
-[![Build Status](https://travis-ci.org/simkimsia/UtilityBehaviors.png)](https://travis-ci.org/kgrodzicki/ChessProblem)
+[![Build Status](https://travis-ci.org/kgrodzicki/ChessProblem.svg)](https://travis-ci.org/kgrodzicki/ChessProblem)
 ChessProblem
 ============
 The problem is to find all unique configurations of a set of normal chess pieces on a chess
